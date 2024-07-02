@@ -23,6 +23,8 @@ target("yw_pthreads")
     end
     add_defines("HAVE_CONFIG_H")
     add_defines("PTW32_RC_MSC")
+    add_defines("PTW32_CLEANUP_C")
+    
     -- remove_files("pthread.c")
     add_files(
         "cleanup.c",
@@ -178,8 +180,9 @@ target("yw_pthreads")
     -- 如果是动态库，增加宏定义 PTW32_BUILD, 否则为 PTW32_STATIC_LIB
     if is_kind("shared") then
         --add_defines("PTW32_BUILD")
-        add_rules("utils.symbols.export_all")
+       --add_rules("utils.symbols.export_all")
         -- 把 PTHREAD_SHARED_SOURCES 一组文件加入到编译中
+        add_defines("_WINDLL")
         
 
     else
